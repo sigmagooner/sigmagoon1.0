@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfaf7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="日线" />
+    <title>日线</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="quiet-header">
+        <div>
+          <h1>日线</h1>
+          <p id="syncStatus">未登录，本地保存</p>
+        </div>
+
+        <section class="auth-panel" aria-label="账号">
+          <form id="authForm" class="auth-form">
+            <input id="emailInput" type="email" autocomplete="email" placeholder="邮箱" required />
+            <input
+              id="passwordInput"
+              type="password"
+              autocomplete="current-password"
+              placeholder="密码"
+              required
+            />
+            <button type="submit">登录</button>
+            <button id="signUpButton" type="button">注册</button>
+          </form>
+          <div id="userPanel" class="user-panel" hidden>
+            <span id="userEmail"></span>
+            <button id="exportMarkdownButton" type="button">导出 Markdown</button>
+            <button id="exportButton" type="button">备份 JSON</button>
+            <button id="importButton" type="button">导入</button>
+            <button id="signOutButton" type="button">退出</button>
+            <input id="importFile" type="file" accept="application/json,.json" hidden />
+          </div>
+        </section>
+      </header>
+
+      <section aria-label="竖向日记时间轴">
+        <div class="timeline-tools" aria-label="查找日记">
+          <input id="searchInput" type="search" placeholder="搜索日记内容" />
+          <input id="jumpDateInput" type="date" />
+          <button id="todayButton" type="button">今天</button>
+        </div>
+        <div id="timeline" class="timeline"></div>
+        <button id="loadMoreButton" class="load-more" type="button">载入更早</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
