@@ -4,6 +4,8 @@ const SUPABASE_ANON_KEY =
 
 const timeline = document.querySelector("#timeline");
 const loadMoreButton = document.querySelector("#loadMoreButton");
+const menuButton = document.querySelector("#menuButton");
+const menuPanel = document.querySelector("#menuPanel");
 const searchInput = document.querySelector("#searchInput");
 const jumpDateInput = document.querySelector("#jumpDateInput");
 const todayButton = document.querySelector("#todayButton");
@@ -30,6 +32,7 @@ let currentUser = null;
 let saveTimers = new Map();
 let sessionVersion = 0;
 let focusedDateKey = todayKey();
+let shouldFocusDate = true;
 
 function loadLocalEntries() {
   try {
@@ -257,7 +260,7 @@ function renderTimeline() {
     article.dataset.date = key;
     if (text.trim()) article.classList.add("has-entry");
     if (key === currentTodayKey) article.classList.add("is-today");
-    if (key === currentTodayKey || key === focusedDateKey) article.classList.add("is-open");
+    if (shouldFocusDate && key === focusedDateKey) article.classList.add("is-open");
 
     const dateLabel = document.createElement("div");
     dateLabel.className = "date";
@@ -313,6 +316,12 @@ function renderTimeline() {
     node.addEventListener("click", () => {
       article.classList.toggle("is-open");
       if (article.classList.contains("is-open")) {
+        focusedDateKey = key;
+        shouldFocusDate = true;
+      } else if (focusedDateKey === key) {
+        shouldFocusDate = false;
+      }
+      if (article.classList.contains("is-open")) {
         textarea.focus();
       }
     });
@@ -345,6 +354,7 @@ function jumpToDate(key) {
   }
 
   focusedDateKey = key;
+  shouldFocusDate = true;
   searchInput.value = "";
   ensureDateVisible(key);
   renderTimeline();
@@ -523,7 +533,14 @@ importFile.addEventListener("change", () => {
   importBackup(importFile.files?.[0]);
 });
 
+menuButton.addEventListener("click", () => {
+  const willOpen = menuPanel.hidden;
+  menuPanel.hidden = !willOpen;
+  menuButton.setAttribute("aria-expanded", String(willOpen));
+});
+
 searchInput.addEventListener("input", () => {
+  shouldFocusDate = false;
   renderTimeline();
 });
 
@@ -533,6 +550,7 @@ jumpDateInput.addEventListener("change", () => {
 
 todayButton.addEventListener("click", () => {
   focusedDateKey = todayKey();
+  shouldFocusDate = true;
   jumpDateInput.value = focusedDateKey;
   searchInput.value = "";
   renderTimeline();

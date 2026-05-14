@@ -20,7 +20,19 @@
           <p id="syncStatus">未登录，本地保存</p>
         </div>
 
-        <section class="auth-panel" aria-label="账号">
+        <button id="menuButton" class="menu-button" type="button" aria-expanded="false">菜单</button>
+      </header>
+
+      <section id="menuPanel" class="menu-panel" aria-label="功能菜单" hidden>
+        <div class="menu-block" aria-label="查找日记">
+          <p>查找</p>
+          <input id="searchInput" type="search" placeholder="搜索日记内容" />
+          <input id="jumpDateInput" type="date" />
+          <button id="todayButton" type="button">回到今天</button>
+        </div>
+
+        <section class="menu-block" aria-label="账号">
+          <p>账号</p>
           <form id="authForm" class="auth-form">
             <input id="emailInput" type="email" autocomplete="email" placeholder="邮箱" required />
             <input
@@ -42,14 +54,9 @@
             <input id="importFile" type="file" accept="application/json,.json" hidden />
           </div>
         </section>
-      </header>
+      </section>
 
       <section aria-label="竖向日记时间轴">
-        <div class="timeline-tools" aria-label="查找日记">
-          <input id="searchInput" type="search" placeholder="搜索日记内容" />
-          <input id="jumpDateInput" type="date" />
-          <button id="todayButton" type="button">今天</button>
-        </div>
         <div id="timeline" class="timeline"></div>
         <button id="loadMoreButton" class="load-more" type="button">载入更早</button>
       </section>

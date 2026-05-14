@@ -60,7 +60,8 @@ h1 {
 }
 
 .quiet-header p,
-.user-panel span {
+.user-panel span,
+.menu-block p {
   margin: 0;
   color: var(--muted);
   font-size: 14px;
@@ -74,32 +75,10 @@ h1 {
   color: var(--line-strong);
 }
 
-.auth-panel {
-  display: grid;
-  justify-items: end;
-  gap: 10px;
-  min-width: min(100%, 330px);
-}
-
-.auth-form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px;
-  width: 100%;
-}
-
-.auth-form input {
-  min-width: 0;
-  min-height: 36px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0 10px;
-  background: var(--paper);
-  color: var(--ink);
-}
-
+.menu-button,
 .auth-form button,
-.user-panel button {
+.user-panel button,
+.menu-block button {
   min-height: 36px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -108,7 +87,8 @@ h1 {
   color: var(--muted);
 }
 
-.auth-form button:hover,
+.menu-button:hover,
+.menu-block button:hover,
 .user-panel button:hover,
 .load-more:hover {
   border-color: var(--line-strong);
@@ -119,36 +99,52 @@ h1 {
   color: var(--ink);
 }
 
+.menu-panel {
+  display: grid;
+  gap: 14px;
+  margin: -14px 0 28px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.menu-block {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.menu-block p {
+  padding-top: 9px;
+}
+
+.menu-block input,
+.auth-form input {
+  min-width: 0;
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.auth-form,
 .user-panel {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
   gap: 8px;
   width: 100%;
 }
 
-.timeline-tools {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px 72px;
-  gap: 8px;
-  margin-bottom: 22px;
+.auth-form input {
+  flex: 1 1 150px;
 }
 
-.timeline-tools input,
-.timeline-tools button {
-  min-width: 0;
-  min-height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0 11px;
-  background: var(--paper);
-  color: var(--muted);
-}
-
-.timeline-tools button:hover {
-  border-color: var(--line-strong);
-  color: var(--ink);
+.user-panel {
+  align-items: center;
 }
 
 .timeline {
@@ -296,16 +292,16 @@ input:focus {
     margin-bottom: 28px;
   }
 
-  .auth-panel {
-    justify-items: stretch;
-  }
-
   .auth-form {
+    flex-direction: column;
+  }
+
+  .menu-block {
     grid-template-columns: 1fr;
   }
 
-  .timeline-tools {
-    grid-template-columns: 1fr;
+  .menu-block p {
+    padding-top: 0;
   }
 
   .timeline::before {
