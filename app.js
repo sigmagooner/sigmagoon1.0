@@ -537,6 +537,7 @@ menuButton.addEventListener("click", () => {
   const willOpen = menuPanel.hidden;
   menuPanel.hidden = !willOpen;
   menuButton.setAttribute("aria-expanded", String(willOpen));
+  menuButton.textContent = willOpen ? "关闭" : "菜单";
 });
 
 searchInput.addEventListener("input", () => {
