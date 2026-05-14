@@ -306,11 +306,24 @@ input:focus {
     margin-bottom: 30px;
   }
 
+  .menu-button {
+    position: fixed;
+    z-index: 30;
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    min-width: 58px;
+    background: rgba(255, 254, 250, 0.96);
+    box-shadow: 0 8px 24px rgba(31, 33, 29, 0.08);
+  }
+
   .menu-panel {
-    top: 98px;
-    right: 0;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    top: calc(max(14px, env(safe-area-inset-top)) + 46px);
+    right: 14px;
+    left: 14px;
+    width: auto;
+    max-height: min(72vh, 560px);
+    overflow: auto;
   }
 
   .auth-form,

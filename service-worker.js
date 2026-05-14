@@ -1,4 +1,4 @@
-const CACHE_NAME = "timeline-diary-v1";
+const CACHE_NAME = "timeline-diary-v2";
 const APP_SHELL = [
   "/",
   "/index.html",
